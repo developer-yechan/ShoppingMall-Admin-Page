@@ -46,7 +46,6 @@ module.exports = class Order extends Sequelize.Model {
         },
         delivery_num: {
           type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
           allowNull: true,
         },
       },
