@@ -17,6 +17,7 @@ module.exports = class Order extends Sequelize.Model {
         },
         delivery_state: {
           type: Sequelize.ENUM("배송 대기", "배송 중", "배송 완료"),
+          defaultValue: "배송 대기",
           allowNull: false,
         },
         quantity: {
