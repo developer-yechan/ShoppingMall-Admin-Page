@@ -18,7 +18,7 @@ const createOrder = async (
   }
   if (coupon_id) {
   }
-  const order = orderRepo.createOrder(
+  const order = await orderRepo.createOrder(
     await createOrderDao(
       pay_state,
       quantity,

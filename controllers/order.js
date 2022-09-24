@@ -10,7 +10,7 @@ const createOrder = async (req, res, next) => {
       buyr_name,
       coupon_id,
     } = req.body;
-    const order = orderService.createOrder(
+    const order = await orderService.createOrder(
       pay_state,
       quantity,
       buyr_city,
