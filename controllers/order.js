@@ -1,3 +1,4 @@
+const orderService = require("../services/order");
 const createOrder = async (req, res, next) => {
   try {
     const {
@@ -23,3 +24,5 @@ const createOrder = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports = { createOrder };
