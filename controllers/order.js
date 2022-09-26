@@ -25,6 +25,23 @@ const createOrder = async (req, res, next) => {
   }
 };
 
+const findOrder = async (req, res, next) => {
+  try {
+    const { order_num } = req.params;
+    const order = await orderService.findOrder(order_num);
+    return res.status(200).json(order);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const findOrders = async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err);
+  }
+};
+
 const updateOrder = async (req, res, next) => {
   try {
     const { order_num, delivery_state } = req.body;
@@ -45,4 +62,4 @@ const deleteOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { createOrder, updateOrder, deleteOrder };
+module.exports = { createOrder, updateOrder, deleteOrder, findOrder };

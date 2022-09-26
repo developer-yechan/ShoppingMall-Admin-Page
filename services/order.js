@@ -34,7 +34,23 @@ const createOrder = async (
   return order;
 };
 
+const findOrder = async (order_num) => {
+  const order = await orderRepo.findOrder(order_num);
+  return order;
+};
+
+const findOrders = async (req, res, next) => {
+  try {
+  } catch (err) {
+    next(err);
+  }
+};
+
 const updateOrder = async (order_num, delivery_state) => {
+  const isExistingOrder = await orderRepo.findOrder(order_num);
+  if (!isExistingOrder) {
+    throw new Error("이미 취소된 주문입니다.");
+  }
   const order = await orderRepo.updateOrder(
     updateOrderDao(order_num, delivery_state)
   );
@@ -42,7 +58,11 @@ const updateOrder = async (order_num, delivery_state) => {
 };
 
 const deleteOrder = async (order_num) => {
+  const isExistingOrder = await orderRepo.findOrder(order_num);
+  if (!isExistingOrder) {
+    throw new Error("이미 취소된 주문입니다.");
+  }
   await orderRepo.deleteOrder(order_num);
 };
 
-module.exports = { createOrder, updateOrder, deleteOrder };
+module.exports = { createOrder, updateOrder, deleteOrder, findOrder };

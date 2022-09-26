@@ -10,7 +10,6 @@ module.exports = class Order extends Sequelize.Model {
           allowNull: false,
           unique: true,
         },
-        //주문 상태
         pay_state: {
           type: Sequelize.ENUM("결제 대기", "결제 완료", "결제 취소"),
           allowNull: false,
