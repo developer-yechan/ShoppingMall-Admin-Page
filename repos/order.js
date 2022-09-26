@@ -7,9 +7,19 @@ const createOrder = async (createOrderDao) => {
 
 const findOrder = async (order_num) => {
   const order = await Order.findOne({
-    attributes: {
-      exclude: ["deletedAt"],
-    },
+    attributes: [
+      ["createdAt", "date"],
+      "order_num",
+      "pay_state",
+      "delivery_state",
+      "quantity",
+      "price",
+      "buyr_city",
+      "buyr_country",
+      "buyr_zipx",
+      "buyr_name",
+      "delivery_num",
+    ],
     where: {
       order_num,
     },
@@ -17,9 +27,9 @@ const findOrder = async (order_num) => {
   return order;
 };
 
-const findOrders = async (order_num) => {
-  const order = await orderRepo.findOrder(order_num);
-  return order;
+const findOrders = async (query) => {
+  const orders = await Order.findAll(query);
+  return orders;
 };
 
 const updateOrder = async (updateOrderDao) => {
@@ -37,4 +47,10 @@ const deleteOrder = async (order_num) => {
   });
 };
 
-module.exports = { createOrder, updateOrder, deleteOrder, findOrder };
+module.exports = {
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  findOrder,
+  findOrders,
+};

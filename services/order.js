@@ -2,6 +2,7 @@ const createOrderDao = require("../dao/createOrderDao");
 const updateOrderDao = require("../dao/updateOrderDao");
 const orderRepo = require("../repos/order");
 const { getCountry, getPrice } = require("../utils/xlsx");
+const queryBuilder = require("../utils/queryBuilder");
 const getExchangePrice = require("../utils/getExchangePrice");
 
 const createOrder = async (
@@ -39,20 +40,35 @@ const findOrder = async (order_num) => {
   return order;
 };
 
-const findOrders = async (req, res, next) => {
-  try {
-  } catch (err) {
-    next(err);
-  }
+const findOrders = async (name, state, start_date, end_date) => {
+  const query = queryBuilder(name, state, start_date, end_date);
+  const orders = await orderRepo.findOrders(query);
+  return orders;
 };
 
-const updateOrder = async (order_num, delivery_state) => {
+const updateOrder = async (
+  order_num,
+  delivery_state,
+  pay_state,
+  buyr_city,
+  buyr_country,
+  buyr_zipx,
+  buyr_name
+) => {
   const isExistingOrder = await orderRepo.findOrder(order_num);
   if (!isExistingOrder) {
     throw new Error("이미 취소된 주문입니다.");
   }
   const order = await orderRepo.updateOrder(
-    updateOrderDao(order_num, delivery_state)
+    updateOrderDao(
+      order_num,
+      delivery_state,
+      pay_state,
+      buyr_city,
+      buyr_country,
+      buyr_zipx,
+      buyr_name
+    )
   );
   return order;
 };
@@ -65,4 +81,10 @@ const deleteOrder = async (order_num) => {
   await orderRepo.deleteOrder(order_num);
 };
 
-module.exports = { createOrder, updateOrder, deleteOrder, findOrder };
+module.exports = {
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  findOrder,
+  findOrders,
+};
