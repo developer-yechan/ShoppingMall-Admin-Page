@@ -1,7 +1,9 @@
 const createOrderDao = require("../dao/createOrderDao");
+const updateOrderDao = require("../dao/updateOrderDao");
 const orderRepo = require("../repos/order");
 const { getCountry, getPrice } = require("../utils/xlsx");
 const getExchangePrice = require("../utils/getExchangePrice");
+
 const createOrder = async (
   pay_state,
   quantity,
@@ -19,7 +21,7 @@ const createOrder = async (
   if (coupon_id) {
   }
   const order = await orderRepo.createOrder(
-    await createOrderDao(
+    createOrderDao(
       pay_state,
       quantity,
       price,
@@ -32,4 +34,11 @@ const createOrder = async (
   return order;
 };
 
-module.exports = { createOrder };
+const updateOrder = async (order_num, delivery_state) => {
+  const order = await orderRepo.updateOrder(
+    updateOrderDao(order_num, delivery_state)
+  );
+  return order;
+};
+
+module.exports = { createOrder, updateOrder };

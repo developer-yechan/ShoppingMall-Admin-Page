@@ -5,4 +5,11 @@ const createOrder = async (createOrderDao) => {
   return order;
 };
 
-module.exports = { createOrder };
+const updateOrder = async (updateOrderDao) => {
+  const order = await Order.update(updateOrderDao.data, {
+    where: updateOrderDao.order_num,
+  });
+  return order;
+};
+
+module.exports = { createOrder, updateOrder };

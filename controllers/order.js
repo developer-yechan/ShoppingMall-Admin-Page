@@ -25,4 +25,14 @@ const createOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { createOrder };
+const updateOrder = async (req, res, next) => {
+  try {
+    const { order_num, delivery_state } = req.body;
+    const order = await orderService.updateOrder(order_num, delivery_state);
+    return res.status(200).json({ message: "주문 배송 상태 수정 완료" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createOrder, updateOrder };
