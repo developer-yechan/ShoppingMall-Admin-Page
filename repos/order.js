@@ -12,4 +12,12 @@ const updateOrder = async (updateOrderDao) => {
   return order;
 };
 
-module.exports = { createOrder, updateOrder };
+const deleteOrder = async (order_num) => {
+  await Order.destroy({
+    where: {
+      order_num,
+    },
+  });
+};
+
+module.exports = { createOrder, updateOrder, deleteOrder };

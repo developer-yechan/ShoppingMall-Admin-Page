@@ -35,4 +35,14 @@ const updateOrder = async (req, res, next) => {
   }
 };
 
-module.exports = { createOrder, updateOrder };
+const deleteOrder = async (req, res, next) => {
+  try {
+    const { order_num } = req.params;
+    await orderService.deleteOrder(order_num);
+    return res.status(200).json({ message: "주문 취소 완료" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createOrder, updateOrder, deleteOrder };

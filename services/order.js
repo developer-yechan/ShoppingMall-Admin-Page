@@ -41,4 +41,8 @@ const updateOrder = async (order_num, delivery_state) => {
   return order;
 };
 
-module.exports = { createOrder, updateOrder };
+const deleteOrder = async (order_num) => {
+  await orderRepo.deleteOrder(order_num);
+};
+
+module.exports = { createOrder, updateOrder, deleteOrder };
