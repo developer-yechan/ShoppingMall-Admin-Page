@@ -1,7 +1,10 @@
 const createOrderDao = require("../dao/createOrderDao");
+const updateOrderDao = require("../dao/updateOrderDao");
 const orderRepo = require("../repos/order");
 const { getCountry, getPrice } = require("../utils/xlsx");
+const queryBuilder = require("../utils/queryBuilder");
 const getExchangePrice = require("../utils/getExchangePrice");
+
 const createOrder = async (
   pay_state,
   quantity,
@@ -19,7 +22,7 @@ const createOrder = async (
   if (coupon_id) {
   }
   const order = await orderRepo.createOrder(
-    await createOrderDao(
+    createOrderDao(
       pay_state,
       quantity,
       price,
@@ -32,4 +35,56 @@ const createOrder = async (
   return order;
 };
 
-module.exports = { createOrder };
+const findOrder = async (order_num) => {
+  const order = await orderRepo.findOrder(order_num);
+  return order;
+};
+
+const findOrders = async (name, state, start_date, end_date) => {
+  const query = queryBuilder(name, state, start_date, end_date);
+  const orders = await orderRepo.findOrders(query);
+  return orders;
+};
+
+const updateOrder = async (
+  order_num,
+  delivery_state,
+  pay_state,
+  buyr_city,
+  buyr_country,
+  buyr_zipx,
+  buyr_name
+) => {
+  const isExistingOrder = await orderRepo.findOrder(order_num);
+  if (!isExistingOrder) {
+    throw new Error("이미 취소된 주문입니다.");
+  }
+  const order = await orderRepo.updateOrder(
+    updateOrderDao(
+      order_num,
+      delivery_state,
+      pay_state,
+      buyr_city,
+      buyr_country,
+      buyr_zipx,
+      buyr_name
+    )
+  );
+  return order;
+};
+
+const deleteOrder = async (order_num) => {
+  const isExistingOrder = await orderRepo.findOrder(order_num);
+  if (!isExistingOrder) {
+    throw new Error("이미 취소된 주문입니다.");
+  }
+  await orderRepo.deleteOrder(order_num);
+};
+
+module.exports = {
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  findOrder,
+  findOrders,
+};

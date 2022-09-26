@@ -10,14 +10,13 @@ module.exports = class Order extends Sequelize.Model {
           allowNull: false,
           unique: true,
         },
-        //주문 상태
         pay_state: {
-          type: Sequelize.ENUM("결제 대기", "결제 완료", "결제 취소"),
+          type: Sequelize.ENUM("결제대기", "결제완료", "결제취소"),
           allowNull: false,
         },
         delivery_state: {
-          type: Sequelize.ENUM("배송 대기", "배송 중", "배송 완료"),
-          defaultValue: "배송 대기",
+          type: Sequelize.ENUM("배송대기", "배송중", "배송완료"),
+          defaultValue: "배송대기",
           allowNull: false,
         },
         quantity: {
@@ -46,7 +45,6 @@ module.exports = class Order extends Sequelize.Model {
         },
         delivery_num: {
           type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
           allowNull: true,
         },
       },
