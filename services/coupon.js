@@ -2,7 +2,7 @@ const createCouponDao = require("../dao/createCouponDao");
 const couponRepo = require("../repos/coupon");
 
 const createCoupon = async (type, state, discount) => {
-  const coupon = couponRepo.createCoupon(
+  const coupon = await couponRepo.createCoupon(
     createCouponDao(type, state, discount)
   );
   return coupon;

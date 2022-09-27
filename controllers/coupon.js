@@ -3,7 +3,7 @@ const couponService = require("../services/coupon");
 const createCoupon = async (req, res, next) => {
   try {
     const { type, state, discount } = req.body;
-    const coupon = couponService.createCoupon(type, state, discount);
+    const coupon = await couponService.createCoupon(type, state, discount);
     return res.status(201).json(coupon);
   } catch (err) {
     next(err);
