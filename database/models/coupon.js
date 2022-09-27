@@ -4,7 +4,7 @@ module.exports = class Coupon extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        coupon_id: {
+        coupon_code: {
           type: Sequelize.UUID,
           defaultValue: Sequelize.UUIDV4,
           allowNull: false,
@@ -15,7 +15,8 @@ module.exports = class Coupon extends Sequelize.Model {
           allowNull: false,
         },
         state: {
-          type: Sequelize.ENUM("사용 대기", "사용 완료", "사용 취소"),
+          type: Sequelize.ENUM("미사용", "사용완료", "사용취소"),
+          defaultValue: "미사용",
           allowNull: false,
         },
         discount: {
