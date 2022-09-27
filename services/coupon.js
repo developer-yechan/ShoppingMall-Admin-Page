@@ -1,14 +1,17 @@
 const createCouponDao = require("../dao/createCouponDao");
 const couponRepo = require("../repos/coupon");
 
-const createCoupon = async (type, state, discount) => {
+const createCoupon = async (CouponTypeId, state, discount) => {
   const coupon = await couponRepo.createCoupon(
-    createCouponDao(type, state, discount)
+    createCouponDao(CouponTypeId, state, discount)
   );
   return coupon;
 };
 
-const findCoupon = async () => {};
+const findCoupon = async (couponCode) => {
+  const coupon = await couponRepo.findCoupon(couponCode);
+  return coupon;
+};
 
 const findCoupons = async () => {};
 
@@ -16,4 +19,4 @@ const updateCoupon = async () => {};
 
 const deleteCoupon = async () => {};
 
-module.exports = { createCoupon };
+module.exports = { createCoupon, findCoupon };

@@ -2,8 +2,12 @@ const couponService = require("../services/coupon");
 
 const createCoupon = async (req, res, next) => {
   try {
-    const { type, state, discount } = req.body;
-    const coupon = await couponService.createCoupon(type, state, discount);
+    const { CouponTypeId, state, discount } = req.body;
+    const coupon = await couponService.createCoupon(
+      CouponTypeId,
+      state,
+      discount
+    );
     return res.status(201).json(coupon);
   } catch (err) {
     next(err);
@@ -12,6 +16,9 @@ const createCoupon = async (req, res, next) => {
 
 const findCoupon = async (req, res, next) => {
   try {
+    const { couponCode } = req.params;
+    const coupon = await couponService.findCoupon(couponCode);
+    return res.status(200).json(coupon);
   } catch (err) {
     next(err);
   }
@@ -38,4 +45,10 @@ const deleteCoupon = async (req, res, next) => {
   }
 };
 
-module.exports = { createCoupon };
+module.exports = {
+  createCoupon,
+  findCoupon,
+  findCoupons,
+  updateCoupon,
+  deleteCoupon,
+};
