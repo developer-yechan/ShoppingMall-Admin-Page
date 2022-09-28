@@ -11,9 +11,7 @@ module.exports = (
 ) => {
   if (delivery_state !== "배송대기") {
     return {
-      order_num: {
-        order_num,
-      },
+      order_num,
       data: {
         delivery_state,
         delivery_num: uuidv4(),
@@ -26,9 +24,7 @@ module.exports = (
     };
   }
   return {
-    order_num: {
-      order_num,
-    },
+    order_num,
     data: {
       delivery_state,
       delivery_num: null,

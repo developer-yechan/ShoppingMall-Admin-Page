@@ -22,8 +22,22 @@ const findCoupon = async (couponCode) => {
 
 const findCoupons = async () => {};
 
-const updateCoupon = async () => {};
+const updateCoupon = async (updateCouponDao) => {
+  const coupon = await Coupon.update(updateCouponDao.data, {
+    where: {
+      coupon_code: updateCouponDao.coupon_code,
+    },
+  });
+  return coupon;
+};
 
-const deleteCoupon = async () => {};
+const deleteCoupon = async (coupon_code) => {
+  const coupon = await Coupon.destroy({
+    where: {
+      coupon_code,
+    },
+  });
+  return coupon;
+};
 
-module.exports = { createCoupon, findCoupon };
+module.exports = { createCoupon, findCoupon, updateCoupon, deleteCoupon };

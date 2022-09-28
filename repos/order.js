@@ -34,7 +34,7 @@ const findOrders = async (query) => {
 
 const updateOrder = async (updateOrderDao) => {
   const order = await Order.update(updateOrderDao.data, {
-    where: updateOrderDao.order_num,
+    where: { order_num: updateOrderDao.order_num },
   });
   return order;
 };

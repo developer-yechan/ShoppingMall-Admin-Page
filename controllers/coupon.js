@@ -33,6 +33,9 @@ const findCoupons = async (req, res, next) => {
 
 const updateCoupon = async (req, res, next) => {
   try {
+    const { state, OrderId, couponCode } = req.body;
+    const coupon = await couponService.updateCoupon(state, OrderId, couponCode);
+    return res.status(200).json({ message: "쿠폰 정보 수정 완료" });
   } catch (err) {
     next(err);
   }
@@ -40,6 +43,9 @@ const updateCoupon = async (req, res, next) => {
 
 const deleteCoupon = async (req, res, next) => {
   try {
+    const { couponCode } = req.params;
+    const coupon = await couponService.deleteCoupon(couponCode);
+    return res.status(200).json({ message: "쿠폰 삭제 완료" });
   } catch (err) {
     next(err);
   }
