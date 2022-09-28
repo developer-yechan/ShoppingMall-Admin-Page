@@ -20,7 +20,17 @@ const findCoupon = async (couponCode) => {
   return coupon;
 };
 
-const findCoupons = async () => {};
+const findCoupons = async () => {
+  const coupons = await Coupon.findAll({
+    attributes: { exclude: ["OrderId", "createdAt", "updatedAt", "deletedAt"] },
+    include: {
+      model: CouponType,
+      attributes: ["type"],
+      required: true,
+    },
+  });
+  return coupons;
+};
 
 const updateCoupon = async (updateCouponDao) => {
   const coupon = await Coupon.update(updateCouponDao.data, {
@@ -40,4 +50,10 @@ const deleteCoupon = async (coupon_code) => {
   return coupon;
 };
 
-module.exports = { createCoupon, findCoupon, updateCoupon, deleteCoupon };
+module.exports = {
+  createCoupon,
+  findCoupon,
+  findCoupons,
+  updateCoupon,
+  deleteCoupon,
+};

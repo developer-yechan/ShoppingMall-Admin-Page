@@ -10,11 +10,14 @@ const createCoupon = async (CouponTypeId, state, discount) => {
 };
 
 const findCoupon = async (couponCode) => {
-  const coupon = await couponRepo.findCoupon(couponCode);
-  return coupon;
+  const coupons = await couponRepo.findCoupon(couponCode);
+  return coupons;
 };
 
-const findCoupons = async () => {};
+const findCoupons = async () => {
+  const coupons = await couponRepo.findCoupons();
+  return coupons;
+};
 
 const updateCoupon = async (state, OrderId, couponCode) => {
   const isExistingCoupon = await couponRepo.findCoupon(couponCode);
@@ -36,4 +39,10 @@ const deleteCoupon = async (couponCode) => {
   return coupon;
 };
 
-module.exports = { createCoupon, findCoupon, updateCoupon, deleteCoupon };
+module.exports = {
+  createCoupon,
+  findCoupon,
+  findCoupons,
+  updateCoupon,
+  deleteCoupon,
+};

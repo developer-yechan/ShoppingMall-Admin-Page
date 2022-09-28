@@ -26,6 +26,8 @@ const findCoupon = async (req, res, next) => {
 
 const findCoupons = async (req, res, next) => {
   try {
+    const coupons = await couponService.findCoupons();
+    return res.status(200).json(coupons);
   } catch (err) {
     next(err);
   }
