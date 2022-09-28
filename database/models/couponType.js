@@ -5,7 +5,15 @@ module.exports = class CouponType extends Sequelize.Model {
     return super.init(
       {
         type: {
+          type: Sequelize.STRING(30),
+          allowNull: false,
+        },
+        description: {
           type: Sequelize.STRING(50),
+          allowNull: true,
+        },
+        discount: {
+          type: Sequelize.STRING(30),
           allowNull: false,
         },
       },

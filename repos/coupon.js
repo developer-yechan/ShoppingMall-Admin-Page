@@ -1,4 +1,4 @@
-const { Coupon, CouponType } = require("../database/models");
+const { Coupon, CouponType, Order, sequelize } = require("../database/models");
 
 const createCoupon = async (createCouponDao) => {
   const coupon = await Coupon.create(createCouponDao);
@@ -50,10 +50,30 @@ const deleteCoupon = async (coupon_code) => {
   return coupon;
 };
 
+const couponStatistics = async () => {
+  const totalDiscount = sequelize.fn("sum", sequelize.col("discount_amount"));
+  const coupons = await Coupon.findAndCountAll({
+    attributes: ["CouponTypeId", "state", [totalDiscount, "totalDiscount"]],
+    include: [
+      {
+        model: CouponType,
+        attributes: ["type"],
+        required: true,
+      },
+    ],
+    group: "CouponTypeId",
+    where: {
+      state: "사용완료",
+    },
+  });
+  return coupons;
+};
+
 module.exports = {
   createCoupon,
   findCoupon,
   findCoupons,
   updateCoupon,
   deleteCoupon,
+  couponStatistics,
 };
