@@ -12,14 +12,14 @@ const createOrder = async (
   buyr_country,
   buyr_zipx,
   buyr_name,
-  coupon_id
+  coupon_code
 ) => {
   const country = getCountry(buyr_country);
   let price = getPrice(country, quantity);
   if (buyr_country !== "KR") {
     price = await getExchangePrice(price);
   }
-  if (coupon_id) {
+  if (coupon_code) {
   }
   const order = await orderRepo.createOrder(
     createOrderDao(

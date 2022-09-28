@@ -8,7 +8,7 @@ const createOrder = async (req, res, next) => {
       buyr_country,
       buyr_zipx,
       buyr_name,
-      coupon_id,
+      coupon_code,
     } = req.body;
     const order = await orderService.createOrder(
       pay_state,
@@ -17,7 +17,7 @@ const createOrder = async (req, res, next) => {
       buyr_country,
       buyr_zipx,
       buyr_name,
-      coupon_id
+      coupon_code
     );
     return res.status(201).json(order);
   } catch (err) {

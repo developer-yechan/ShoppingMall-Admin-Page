@@ -5,6 +5,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (name && state && start_date && end_date) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "pay_state",
         "delivery_state",
@@ -27,6 +28,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (name && start_date && end_date) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "pay_state",
         "delivery_state",
@@ -48,6 +50,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (state && start_date && end_date) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "order_num",
         "pay_state",
@@ -68,6 +71,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (name && state) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "order_num",
         "pay_state",
@@ -88,6 +92,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (name) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "order_num",
         "pay_state",
@@ -107,6 +112,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (state) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "order_num",
         "pay_state",
@@ -124,6 +130,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   if (start_date && end_date) {
     return {
       attributes: [
+        "id",
         ["createdAt", "date"],
         "order_num",
         "pay_state",
@@ -142,6 +149,7 @@ const queryBuilder = (name, state, start_date, end_date) => {
   }
   return {
     attributes: [
+      "id",
       ["createdAt", "date"],
       "order_num",
       "pay_state",
