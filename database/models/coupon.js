@@ -15,10 +15,15 @@ module.exports = class Coupon extends Sequelize.Model {
           defaultValue: "미사용",
           allowNull: false,
         },
-        discount: {
+        discount_amount: {
           type: Sequelize.STRING(30),
-          allowNull: false,
+          allowNull: true,
           unique: false,
+        },
+        order_num: {
+          type: Sequelize.UUID,
+          allowNull: true,
+          unique: true,
         },
       },
       {
