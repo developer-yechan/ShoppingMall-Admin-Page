@@ -5,7 +5,7 @@ const createCoupon = async (createCouponDao) => {
   return coupon;
 };
 
-const findCoupon = async (couponCode) => {
+const findCoupon = async (coupon_code) => {
   const coupon = await Coupon.findOne({
     attributes: { exclude: ["deletedAt"] },
     include: {
@@ -14,7 +14,7 @@ const findCoupon = async (couponCode) => {
       required: true,
     },
     where: {
-      coupon_code: couponCode,
+      coupon_code,
     },
   });
   return coupon;

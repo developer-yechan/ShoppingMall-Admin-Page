@@ -20,6 +20,11 @@ module.exports = class Coupon extends Sequelize.Model {
           allowNull: true,
           unique: false,
         },
+        order_num: {
+          type: Sequelize.UUID,
+          allowNull: true,
+          unique: true,
+        },
       },
       {
         sequelize,

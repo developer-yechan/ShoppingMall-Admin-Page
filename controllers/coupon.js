@@ -31,10 +31,11 @@ const findCoupons = async (req, res, next) => {
 
 const updateCoupon = async (req, res, next) => {
   try {
-    const { state, OrderId, couponCode, discountAmount } = req.body;
+    const { state, OrderId, orderNum, couponCode, discountAmount } = req.body;
     const coupon = await couponService.updateCoupon(
       state,
       OrderId,
+      orderNum,
       couponCode,
       discountAmount
     );

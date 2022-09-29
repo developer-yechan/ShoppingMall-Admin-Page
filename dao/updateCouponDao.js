@@ -1,10 +1,11 @@
-module.exports = (state, OrderId, couponCode, discountAmount) => {
+module.exports = (state, OrderId, orderNum, couponCode, discountAmount) => {
   return {
     coupon_code: couponCode,
     data: {
       state,
-      OrderId,
       discount_amount: discountAmount,
+      OrderId,
+      order_num: orderNum,
     },
   };
 };

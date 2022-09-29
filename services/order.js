@@ -1,9 +1,12 @@
 const createOrderDao = require("../dao/createOrderDao");
 const updateOrderDao = require("../dao/updateOrderDao");
 const orderRepo = require("../repos/order");
+const couponRepo = require("../repos/coupon");
 const { getCountry, getPrice } = require("../utils/xlsx");
 const queryBuilder = require("../utils/queryBuilder");
 const getExchangePrice = require("../utils/getExchangePrice");
+const { getDiscountedPrice } = require("../utils/discount");
+const updateCouponDao = require("../dao/updateCouponDao");
 
 const createOrder = async (
   pay_state,
@@ -16,10 +19,14 @@ const createOrder = async (
 ) => {
   const country = getCountry(buyr_country);
   let price = getPrice(country, quantity);
-  if (buyr_country !== "KR") {
+  let priceObject = {};
+  if (buyr_country !== "KR" && !coupon_code) {
     price = await getExchangePrice(price);
   }
   if (coupon_code) {
+    const coupon = await couponRepo.findCoupon(coupon_code);
+    priceObject = await getDiscountedPrice(price, coupon, buyr_country);
+    price = priceObject.discountedPrice;
   }
   const order = await orderRepo.createOrder(
     createOrderDao(
@@ -32,6 +39,18 @@ const createOrder = async (
       buyr_name
     )
   );
+
+  if (coupon_code) {
+    const state = "사용완료";
+    const discountAmount = priceObject.discountPrice;
+    const orderId = order.id;
+    const orderNum = order.order_num;
+    const couponCode = coupon_code;
+    await couponRepo.updateCoupon(
+      updateCouponDao(state, orderId, orderNum, couponCode, discountAmount)
+    );
+  }
+
   return order;
 };
 

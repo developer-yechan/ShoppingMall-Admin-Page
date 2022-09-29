@@ -10,8 +10,8 @@ const createCoupon = async (CouponTypeId, state) => {
 };
 
 const findCoupon = async (couponCode) => {
-  const coupons = await couponRepo.findCoupon(couponCode);
-  return coupons;
+  const coupon = await couponRepo.findCoupon(couponCode);
+  return coupon;
 };
 
 const findCoupons = async () => {
@@ -19,13 +19,19 @@ const findCoupons = async () => {
   return coupons;
 };
 
-const updateCoupon = async (state, OrderId, couponCode, discountAmount) => {
+const updateCoupon = async (
+  state,
+  OrderId,
+  orderNum,
+  couponCode,
+  discountAmount
+) => {
   const isExistingCoupon = await couponRepo.findCoupon(couponCode);
   if (!isExistingCoupon) {
     throw new Error("존재하지 않는 쿠폰입니다.");
   }
   const coupon = await couponRepo.updateCoupon(
-    updateCouponDao(state, OrderId, couponCode, discountAmount)
+    updateCouponDao(state, OrderId, orderNum, couponCode, discountAmount)
   );
   return coupon;
 };
