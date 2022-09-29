@@ -52,8 +52,14 @@ const deleteCoupon = async (coupon_code) => {
 
 const couponStatistics = async () => {
   const totalDiscount = sequelize.fn("sum", sequelize.col("discount_amount"));
-  const coupons = await Coupon.findAndCountAll({
-    attributes: ["CouponTypeId", "state", [totalDiscount, "totalDiscount"]],
+  const count = sequelize.fn("count", sequelize.col("CouponTypeId"));
+  const coupons = await Coupon.findAll({
+    attributes: [
+      "CouponTypeId",
+      "state",
+      [totalDiscount, "totalDiscount"],
+      [count, "count"],
+    ],
     include: [
       {
         model: CouponType,
