@@ -3,7 +3,7 @@ const router = express();
 const orderRouter = require("./order");
 const couponRouter = require("./coupon");
 
-router.use("/api/order", orderRouter);
-router.use("/api/coupon", couponRouter);
+router.use("/api/orders", orderRouter);
+router.use("/api/coupons", couponRouter);
 
 module.exports = router;

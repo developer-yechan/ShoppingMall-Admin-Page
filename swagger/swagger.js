@@ -8,8 +8,8 @@ const options = {
     openapi: "3.0.0",
     info: {
       version: "1.0.0",
-      title: "Community-H swagger",
-      description: "Waynehills Community service API Docs",
+      title: "ShoppingMall-Admin-Page swagger",
+      description: "ShoppingMall-Admin-Page service API Docs",
     },
     servers: [
       {
