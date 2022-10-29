@@ -10,4 +10,5 @@ module.exports = {
   pageNotFound: "페이지를 찾을 수 없습니다.",
   notEqualPassword: "비밀번호가 일치하지 않습니다.",
   pleaseRetry: "다시 시도해주세요.",
+  notFoundException: "not Found Exception",
 };

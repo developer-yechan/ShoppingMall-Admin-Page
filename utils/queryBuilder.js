@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
+//주문자명으로 검색 결제 상태, 주문 날짜로 필터
+
 const queryBuilder = (name, state, start_date, end_date) => {
   if (name && state && start_date && end_date) {
     return {
