@@ -64,7 +64,11 @@ npm start 후 http://localhost:10000/api-docs
 
 # 📜 테스트 케이스
 
-- 추가 예정
+- 쿠폰 생성,조회,수정,삭제 통합테스트
+  ![iamLab_couponCRUD_test](https://user-images.githubusercontent.com/99064214/198872876-cf5e9b73-1d42-42da-a697-b8305402748a.png)
+  
+- 쿠폰 생성,조회,수정,삭제 유닛테스트(service)
+  ![iamLab_couponService_test](https://user-images.githubusercontent.com/99064214/198872897-9a75cb56-e3e8-47a1-b8bb-baf2bfb7a775.png)
 
 # 💡 컨벤션
 
