@@ -8,6 +8,7 @@ const getExchangePrice = require("../utils/getExchangePrice");
 const { getDiscountedPrice } = require("../utils/discount");
 const updateCouponDao = require("../dao/updateCouponDao");
 
+//함수들 클래스화 시켜볼 것
 const createOrder = async (
   pay_state,
   quantity,
